@@ -4,15 +4,13 @@
 
 目标：在原 `dosgame-web` 的游戏页面上增加浏览器本地存档的导出、导入、清除功能。
 
+GitHub 仓库：https://github.com/yxh790820/dosgame-web-save
+
 ## 部署方式
 
 ### 预构建镜像（推荐）
 
-如果已备份最终镜像 tar：
-
-- `dosgame-web-save(latest).syno.tar`
-- `compose.yaml`
-- 游戏库目录
+从 [GitHub Releases](https://github.com/yxh790820/dosgame-web-save/releases) 下载 `dosgame-web-save(latest).syno.tar`，然后：
 
 ```bash
 docker load -i dosgame-web-save(latest).syno.tar
@@ -43,6 +41,8 @@ docker compose up -d
 /app/static/games/bin/*.zip
 /app/static/games/img/*
 ```
+
+游戏文件推荐使用 [chinese-dos-games](https://github.com/rwv/chinese-dos-games) 项目的 `bin/` 和 `img/`，然后用本仓库的 `games.json` 替换原项目的（本仓库版本增加了游戏分类）。
 
 ## 关键改动
 
@@ -103,7 +103,7 @@ Dockerfile 基于原镜像：
 FROM docker.1ms.run/oldiy/dosgame-web-docker:latest
 ```
 
-只覆盖 `/app` 下的网页代码和静态资源。不内置游戏。
+只覆盖 `/app` 下的网页代码和静态资源。仅内置 `games.json` 游戏元数据，游戏 zip 文件需从外部挂载。
 
 如果以后不能拉取原镜像，但已经有 `dosgame-web-save(latest).syno.tar`，优先直接 `docker load`，不要重新 build。
 
@@ -122,7 +122,7 @@ FROM docker.1ms.run/oldiy/dosgame-web-docker:latest
 分类来源已经合并到：
 
 ```text
-/app/static/games/games.json
+static/games/games.json
 ```
 
 `game_infos.py` 启动时只读取 `games.json`。每个游戏条目里有 `category` 和 `categoryLabel` 字段；根级还有 `categoryLabels` 和 `categoryOrder`。
@@ -155,7 +155,19 @@ UNC 未分类
 如果以后分类不准，优先检查：
 
 ```text
-/app/static/games/games.json
+static/games/games.json
 ```
 
 修改对应游戏的 `category` 和 `categoryLabel` 即可。
+
+## 仓库结构说明
+
+- `README.md` — 面向用户的说明文档，包含新手帮助、部署方式、功能说明
+- `AI_MAINTENANCE_NOTES.md` — 本文件，供 AI 辅助维护时参考
+- `app.py` — Flask 应用主入口
+- `game_infos.py` — 游戏数据加载和分类处理
+- `templates/` — Jinja2 模板
+- `static/js/save-manager.js` — 存档管理核心逻辑
+- `static/emularity/` — DOSBox 模拟器前端（来自原镜像）
+- `Dockerfile` — 基于原镜像构建
+- `compose.yaml` — Docker Compose 部署配置
