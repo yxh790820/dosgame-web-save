@@ -1,6 +1,6 @@
 # dosgame-web-save
 
-> DOS 游戏网页版的 Docker 镜像，带存档管理功能 —— 基于 [dosgame-web-docker](https://github.com/oldiy/dosgame-web-docker) 修改，增加了**浏览器本地存档**的导出、导入、清除。
+> DOS 游戏网页版的 Docker 镜像，带存档管理功能 —— 基于 [oldiy/dosgame-web-docker](https://github.com/oldiy/dosgame-web-docker) 基础镜像修改，增加了**浏览器本地存档**的导出、导入、清除。
 
 > 原项目在线演示：https://dos.zczc.cz/
 
