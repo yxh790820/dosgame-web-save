@@ -87,7 +87,6 @@ Dockerfile 基于 `oldiy/dosgame-web-docker` 镜像，仅覆盖网页代码和�
 
 - [oldiy/dosgame-web-docker](https://github.com/oldiy/dosgame-web-docker) — 基础镜像
 - [https://dos.zczc.cz/](https://dos.zczc.cz/) — 原项目在线演示
-- [Claude Code](https://github.com/anthropics/claude-code) — AI 编程助手
 - [OpenAI Codex CLI](https://github.com/openai/codex) — AI 编程助手
 - [DeepSeek](https://deepseek.com/) — AI 模型
 
