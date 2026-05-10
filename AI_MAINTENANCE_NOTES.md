@@ -1,24 +1,30 @@
 # dosgame-web-save 维护说明
 
-这个目录是 `oldiy/dosgame-web-docker` 的自定义派生版源码备份。
+基于 `oldiy/dosgame-web-docker` 镜像的自定义修改版。
 
 目标：在原 `dosgame-web` 的游戏页面上增加浏览器本地存档的导出、导入、清除功能。
 
-## 当前运行方式
+## 部署方式
 
-如果已经备份了最终镜像 tar，运行只需要：
+### 预构建镜像（推荐）
 
-- `dosgame-web-save.tar`
+如果已备份最终镜像 tar：
+
+- `dosgame-web-save(latest).syno.tar`
 - `compose.yaml`
-- 游戏库目录 `/volume7/yxh/game/dosweb`
-
-恢复时先导入镜像：
+- 游戏库目录
 
 ```bash
-docker load -i dosgame-web-save.tar
+docker load -i dosgame-web-save(latest).syno.tar
+docker compose up -d
 ```
 
-然后用 `compose.yaml` 启动。
+### 自行构建
+
+```bash
+docker compose build
+docker compose up -d
+```
 
 `compose.yaml` 没有写死 `container_name`，方便用不同项目名重建，避免旧容器名冲突。
 
@@ -27,7 +33,7 @@ docker load -i dosgame-web-save.tar
 游戏库挂载：
 
 ```text
-/volume7/yxh/game/dosweb -> /app/static/games
+/your/game/library -> /app/static/games
 ```
 
 游戏库结构：
@@ -85,9 +91,9 @@ DosBoxLoader.fileSystemKey(game_info["identifier"])
 
 底层 `static/emularity/loader.js` 会用 BrowserFS + IndexedDB 按 `identifier` 保存写入变化。
 
-本项目没有把存档写到群晖服务端。存档仍在浏览器本地 IndexedDB 中。
+本项目没有把存档写到服务端。存档仍在浏览器本地 IndexedDB 中。
 
-换电脑、换浏览器、清浏览器数据前，需要在游戏页点“导出存档”，得到 `.dossave` 文件。新电脑打开同一个游戏后点“导入存档”，再刷新页面生效。
+换电脑、换浏览器、清浏览器数据前，需要在游戏页点"导出存档"，得到 `.dossave` 文件。新电脑打开同一个游戏后点"导入存档"，再刷新页面生效。
 
 ## 镜像构建
 
@@ -99,12 +105,12 @@ FROM docker.1ms.run/oldiy/dosgame-web-docker:latest
 
 只覆盖 `/app` 下的网页代码和静态资源。不内置游戏。
 
-如果以后不能拉取原镜像，但已经有 `dosgame-web-save.tar`，优先直接 `docker load`，不要重新 build。
+如果以后不能拉取原镜像，但已经有 `dosgame-web-save(latest).syno.tar`，优先直接 `docker load`，不要重新 build。
 
 ## 注意事项
 
 - 不要把存档写回原始游戏 zip。
-- 不要删除 `/volume7/yxh/game/dosweb`，这是真实游戏库。
+- 不要删除挂载的游戏库，这是真实数据。
 - 当前端口映射是 `262:262`。如果需要避开端口冲突，只改 `compose.yaml` 的左侧端口，例如改成 `263:262`。
 - 如果导入存档后看不到效果，刷新游戏页面。
 - `.dossave` 文件只应该导入到同一个游戏 identifier。
@@ -144,7 +150,7 @@ SPG 战棋
 UNC 未分类
 ```
 
-注意：`SPG` 在这套 DOS 分类表里按实际内容显示为“战棋”，不是体育。
+注意：`SPG` 在这套 DOS 分类表里按实际内容显示为"战棋"，不是体育。
 
 如果以后分类不准，优先检查：
 

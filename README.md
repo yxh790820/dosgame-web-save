@@ -1,6 +1,8 @@
 # dosgame-web-save
 
-[oldiy/dosgame-web-docker](https://github.com/oldiy/dosgame-web-docker) 的增强分支，增加了**浏览器本地存档管理**功能（导出/导入/清除）。
+在 [dosgame-web-docker](https://github.com/oldiy/dosgame-web-docker) 镜像基础上修改的版本，增加了**浏览器本地存档管理**功能（导出/导入/清除）。
+
+> 原项目在线演示：https://dos.zczc.cz/
 
 ## 新增功能
 
@@ -14,13 +16,21 @@
 
 换电脑、换浏览器、清浏览器数据前导出存档，即可保留游戏进度。
 
-## 快速开始
+## 部署方式
+
+### 方式一：使用预构建镜像（推荐）
+
+项目中提供了已构建好的 Docker 镜像 `dosgame-web-save(latest).syno.tar`，直接导入即可：
 
 ```bash
-# 构建镜像
-docker compose build
+docker load -i dosgame-web-save(latest).syno.tar
+docker compose up -d
+```
 
-# 启动
+### 方式二：自行构建
+
+```bash
+docker compose build
 docker compose up -d
 ```
 
@@ -61,11 +71,16 @@ your-game-library/
 
 ## 镜像构建
 
-Dockerfile 基于 `oldiy/dosgame-web-docker` 镜像，仅覆盖网页代码和静态资源。
+Dockerfile 基于 `oldiy/dosgame-web-docker` 镜像，仅覆盖网页代码和静态资源，不重新拉取 Python 基础镜像。
+
+## AI 维护说明
+
+`AI_MAINTENANCE_NOTES.md` 包含了项目改动的详细说明，供 AI 辅助维护时参考。
 
 ## 致谢
 
-- [oldiy/dosgame-web-docker](https://github.com/oldiy/dosgame-web-docker) — 原项目
+- [oldiy/dosgame-web-docker](https://github.com/oldiy/dosgame-web-docker) — 基础镜像
+- [https://dos.zczc.cz/](https://dos.zczc.cz/) — 原项目在线演示
 
 ## License
 
