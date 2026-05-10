@@ -4,6 +4,16 @@
 
 > 原项目在线演示：https://dos.zczc.cz/
 
+## 新手帮助
+
+如果你不太懂技术，不会部署，可以这样做：
+
+1. 下载整个项目的代码（点页面上的 **Code → Download ZIP**）
+2. 把 `AI_MAINTENANCE_NOTES.md` 发给 AI（Claude、ChatGPT 等）
+3. 告诉 AI 你的情况，它会根据这份说明一步步指导你完成部署
+
+`AI_MAINTENANCE_NOTES.md` 包含了项目所有改动细节和部署步骤，AI 读完就能帮你。
+
 ## 新增功能
 
 在 DOS 游戏页面增加了三个按钮：
@@ -72,16 +82,6 @@ your-game-library/
 ## 镜像构建
 
 Dockerfile 基于 `oldiy/dosgame-web-docker` 镜像，仅覆盖网页代码和静态资源，不重新拉取 Python 基础镜像。
-
-## 新手帮助
-
-如果你不太懂技术，不会部署，可以这样做：
-
-1. 下载整个项目的代码（点页面上的 **Code → Download ZIP**）
-2. 把 `AI_MAINTENANCE_NOTES.md` 发给 AI（Claude、ChatGPT 等）
-3. 告诉 AI 你的情况，它会根据这份说明一步步指导你完成部署
-
-`AI_MAINTENANCE_NOTES.md` 包含了项目所有改动细节和部署步骤，AI 读完就能帮你。
 
 ## 致谢
 
