@@ -1,0 +1,16 @@
+{
+  "categoryLabels": {
+    "ACT": "动作",
+    "AVG": "冒险",
+    "HGA": "成人",
+    "PUZ": "益智",
+    "RPG": "角色扮演",
+    "RTS": "即时战略",
+    "SIM": "模拟",
+    "SLG": "策略",
+    "SPG": "战棋",
+    "UNC": "未分类"
+  },
+  "categoryOrder": ["RPG", "ACT", "AVG", "SLG", "RTS", "SIM", "SPG", "PUZ", "HGA", "UNC"],
+  "games": {}
+}

@@ -1,0 +1,10 @@
+---
+services:
+  dosgame-web-save:
+    build: .
+    image: dosgame-web-save:latest
+    ports:
+      - 262:262
+    volumes:
+      - /volume7/yxh/game/dosweb:/app/static/games
+    restart: unless-stopped

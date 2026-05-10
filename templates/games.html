@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}游戏列表 - {% endblock %}
+
+
+{% block main %}
+    <div class="container-fluid game-library-container mt-3">
+        <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+            <h3 class="mb-2">游戏列表</h3>
+            <span class="text-muted mb-2">共 {{ games|length }} 个</span>
+        </div>
+        <div class="category-bar mb-3">
+            <a class="btn btn-sm {% if not selected_category %}btn-primary{% else %}btn-outline-secondary{% endif %} mb-2"
+               href="{{ url_for('games') }}">全部</a>
+            {% for category in categories %}
+                <a class="btn btn-sm {% if selected_category == category.code %}btn-primary{% else %}btn-outline-secondary{% endif %} mb-2"
+                   href="{{ url_for('games', category=category.code) }}">
+                    {{ category.label }} <span class="badge badge-light">{{ category.count }}</span>
+                </a>
+            {% endfor %}
+        </div>
+        {% if games %}
+            <div class="game-card-grid">
+                {% for key, game_info in games.items() %}
+                    <a class="game-card" href="{{ url_for('game', identifier=game_info['identifier']) }}">
+                        <div class="game-card-cover">
+                            {% if game_info.coverFilename %}
+                                <img src="{{ url_for('static', filename='games/img/{}/{}'.format(game_info.identifier, game_info.coverFilename)) }}"
+                                     alt="{{ game_info['name']['zh-Hans'] }}"
+                                     onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/game-placeholder.svg') }}';">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='img/game-placeholder.svg') }}"
+                                     alt="{{ game_info['name']['zh-Hans'] }}">
+                            {% endif %}
+                        </div>
+                        <div class="game-card-body">
+                            <div class="game-card-title">{{ game_info['name']['zh-Hans'] }}</div>
+                            <div class="game-card-category">{{ game_info.categoryLabel }}</div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+

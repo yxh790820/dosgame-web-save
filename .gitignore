@@ -1,0 +1,27 @@
+# Docker 镜像备份
+*.tar
+*.tar.gz
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 环境变量（如有）
+.env
+
+# 游戏库不提交（运行时挂载）
+static/games/*
+!static/games/.gitkeep
+!static/games/games.json
