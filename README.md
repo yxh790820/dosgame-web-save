@@ -20,7 +20,7 @@
 
 ### 方式一：使用预构建镜像（推荐）
 
-项目中提供了已构建好的 Docker 镜像 `dosgame-web-save(latest).syno.tar`，直接导入即可：
+从 [Releases](https://github.com/yxh790820/dosgame-web-save/releases) 页面下载 `dosgame-web-save(latest).syno.tar`，然后导入：
 
 ```bash
 docker load -i dosgame-web-save(latest).syno.tar
