@@ -48,7 +48,7 @@ docker compose up -d
 
 ### 挂载游戏库
 
-本镜像**不内置游戏**，需要挂载 DOS 游戏库。
+本镜像**仅内置少量演示游戏**，完整游戏库需要挂载：
 
 推荐使用 [chinese-dos-games](https://github.com/rwv/chinese-dos-games) 项目的游戏文件（`bin/` 和 `img/`），然后用本仓库的 `games.json` 替换原项目的，本仓库版本**增加了游戏分类**，支持按类型筛选。
 
